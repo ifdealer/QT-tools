@@ -4,11 +4,12 @@
 
 #include "ui_ifdealer_QT.h"
 
-
+#include "imagectrl.h"
+#include "processImage.h"
 #include <qdialog.h>
 #include <qstring.h>
 #include <qfiledialog.h>
-
+#include <qgraphicsview.h>
 
 class ifdealer_QT : public QMainWindow
 {
@@ -19,9 +20,17 @@ public:
 
 private:
 	Ui::ifdealer_QTClass ui;
-	QString filestr;
+	QString filepath; //图片路径
+	Image *image;  //图像对象
+	QImage img;
+	QPixmap tempPixmap;
+
+	ImageWidget* m_Image;
 	
+
 private slots:
-	void SelectFile();
-	
+	//选择文件槽函数
+	void SelectFile(); 
+	//显示图片
+	void ShowWindow();
 };

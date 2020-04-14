@@ -14,17 +14,30 @@
    <string>ifdealer_QT</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="PT1">
+   <widget class="QPushButton" name="SelectFile">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>40</x>
       <y>60</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>按钮1</string>
+     <string>选择图片</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Showimage">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>160</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>显示图片</string>
     </property>
    </widget>
   </widget>
