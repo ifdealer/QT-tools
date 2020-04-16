@@ -19,6 +19,7 @@ public:
 	//void setQimage(QImage qimage, ImageWidget* m_Image, QGraphicsScene* originalScene);
 	void setSize(int width ,int height, QGraphicsScene* originalScene);
 	void setCor(QPointF ptsf);
+	void setCorValue(int R,int G, int B);
 private:
 	
 	Ui::ImageWindow ui;

@@ -1,0 +1,2 @@
+I:\项目管理\ifdealer_QT\x64\Debug\ifdealer_QT.exe
+I:\项目管理\ifdealer_QT\x64\Debug\ifdealer_QT.pdb

@@ -6,13 +6,12 @@ using namespace cv;
 
 class Image {
 private:
-	Mat SourceImage;
+	
 	string filepath;
-	int width;
-	int hight;
 public:
 	//∂¡»°Õº∆¨
+	Mat SourceImage;
 	bool readimage(string filepath, int readflag = 1);
-	Mat getImage();
+	
 	
 };

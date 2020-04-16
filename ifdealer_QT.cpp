@@ -29,14 +29,13 @@ void ifdealer_QT::SelectFile() {
 void ifdealer_QT::ShowWindow()
 {
 
-	Mat pic = image->getImage();
-
+	Mat pic = image->SourceImage;
+	cvtColor(image->SourceImage, image->SourceImage, CV_BGR2RGB);
 	img = QImage((const unsigned char*)(pic.data), pic.cols, pic.rows, QImage::Format_RGB888);
 	int width = img.width();
 	int height = img.height();
 	tempPixmap = QPixmap::fromImage(img);
-
-	m_Image = new ImageWidget(&tempPixmap);
+	m_Image = new ImageWidget(image);
 	m_Image->setQGraphicsViewWH(width + 2, height + 2);
 	m_Image->buildWin(width, height);
 	

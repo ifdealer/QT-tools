@@ -11,6 +11,17 @@
 #include <QGraphicsItem>
 #include "ImageWindow.h"
 #include <qgraphicsview.h>
+#include "processImage.h"
+
+
+/*
+	图片操作控制类
+	继承QGraphicsItems类
+	然后重载其鼠标事件等
+	完成缩放和平移功能
+	
+*/
+
 enum Enum_ZoomState {
 	NO_STATE,
 	RESET,
@@ -23,7 +34,7 @@ class ImageWidget :public QGraphicsItem
 {
 	//Q_OBJECT
 public:
-	ImageWidget(QPixmap* pixmap);
+	ImageWidget(Image* image);
 	QRectF  boundingRect() const;
 	void    paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 	void    wheelEvent(QGraphicsSceneWheelEvent* event);
@@ -34,19 +45,22 @@ public:
 	void    mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 	qreal   getScaleValue() const;
 	void    setQGraphicsViewWH(int nwidth, int nheight);
-	QPointF getRecordPoint();
-	bool getRecord();
+	QPointF getRecordPoint();   //获取鼠标记录点
 
-	void buildWin(int width, int height);
+	void buildWin(int width, int height);  //创建图片窗口
 	ImageWindow* getImageWindow();
 private:
 	qreal       m_scaleValue;
 	qreal       m_scaleDafault;
 	QPixmap     m_pix;
+	
 	int         m_zoomState;
 	bool        m_isMove;
 	QPointF     m_startPos;
 	QPointF     recordPoint;
-	ImageWindow* imgWindow;
+	
 	QGraphicsScene* originalScene;
+
+	ImageWindow* imgWindow;
+	Image*       m_image;   //自定义图像操作类
 };

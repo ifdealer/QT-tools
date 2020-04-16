@@ -7,9 +7,11 @@
 #include <math.h>
 #include <iostream>
 using namespace std;
-ImageWidget::ImageWidget(QPixmap* pixmap)
+ImageWidget::ImageWidget(Image* image)
 {
-	m_pix = *pixmap;
+	m_image = image;
+	m_pix = QPixmap::fromImage(QImage((const unsigned char*)(image->SourceImage.data), image->SourceImage.cols, image->SourceImage.rows, QImage::Format_RGB888));
+
 	//If enabled is true, this item will accept hover events; otherwise, it will ignore them. By default, items do not accept hover events.
 	setAcceptDrops(true);//true接收悬停事件
 	m_scaleValue = 0;
@@ -50,7 +52,18 @@ void ImageWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 		recordPoint.setX(recordPoint.x() + m_pix.width() / 2);
 		recordPoint.setY(recordPoint.y() + m_pix.height() / 2);
 		imgWindow->setCor(recordPoint);
+		int x = recordPoint.x();
+		int y = recordPoint.y();
+		//cout << (int)m_image->SourceImage.at<uchar>(y, x) << endl;
+		imgWindow->setCorValue(
+			m_image->SourceImage.at<Vec3b>(y, x)[0],
+			m_image->SourceImage.at<Vec3b>(y, x)[1],
+			m_image->SourceImage.at<Vec3b>(y, x)[2]);
 
+		//int r = qRed(m_image.pixel(10,10));
+		//int g = qGreen(m_image.pixel(recordPoint.toPoint()));
+		//int b = qBlue(m_image.pixel(recordPoint.toPoint()));
+		//imgWindow->setCorValue(r, g, b);
 	}
 
 
@@ -89,8 +102,8 @@ void ImageWidget::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 		moveBy(point.x(), point.y());
 	}
 	//qDebug() << "event->xpos=" << event->pos().x()+ m_pix.width()/2;
-    // qDebug() << "event->ypos=" << event->pos().y()+ m_pix.height()/2;
-    // qDebug() << "event->ypos=" << event->scenePos();
+	// qDebug() << "event->ypos=" << event->pos().y()+ m_pix.height()/2;
+	// qDebug() << "event->ypos=" << event->scenePos();
 	//qDebug() << "pos=" << pos();
 }
 
@@ -109,9 +122,10 @@ void ImageWidget::wheelEvent(QGraphicsSceneWheelEvent* event)//鼠标滚轮事件
 	{
 		return;
 	}
-	else if ((event->delta() < 0) && (m_scaleValue <= m_scaleDafault))//图像缩小到自适应大小之后就不继续缩小
+	else if ((event->delta() < 0) && (m_scaleValue <= m_scaleDafault*0.1))//图像缩小到自适应大小之后就不继续缩小
 	{
-		ResetItemPos();//重置图片大小和位置，使之自适应控件窗口大小
+		//ResetItemPos();//重置图片大小和位置，使之自适应控件窗口大小
+		return;
 	}
 	else
 	{
@@ -169,7 +183,7 @@ void ImageWidget::buildWin(int width, int height)
 {
 	originalScene->addItem(this);
 	imgWindow->setSize(width, height, originalScene);
-	
+
 	imgWindow->show();
 }
 
