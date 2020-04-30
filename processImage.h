@@ -11,7 +11,9 @@ private:
 public:
 	//∂¡»°Õº∆¨
 	Mat SourceImage;
+	Mat processImage;
 	bool readimage(string filepath, int readflag = 1);
+	bool blur(int achor);
 	
 	
 };

@@ -17,6 +17,8 @@ ImageWidget::ImageWidget(Image* image)
 	m_scaleValue = 0;
 	m_scaleDafault = 0;
 	m_isMove = false;
+
+	//新建显示窗口
 	imgWindow = new ImageWindow;
 	originalScene = new QGraphicsScene(imgWindow);
 }
@@ -192,11 +194,22 @@ ImageWindow* ImageWidget::getImageWindow()
 	return imgWindow;
 }
 
+void ImageWidget::setPix(Image* image)
+{
+	m_image = image;
+	m_pix = QPixmap::fromImage(QImage((const unsigned char*)(image->processImage.data), image->processImage.cols, image->processImage.rows, QImage::Format_RGB888));
+	
+	this->update();   //调用该函数时会自动调用继承父类的paint()
+	/*this->update(QRectF(-m_pix.width() / 2, -m_pix.height() / 2,
+		m_pix.width(), m_pix.height()));*/
+}
+
 void ImageWidget::ResetItemPos()//重置图片位置
 {
 	m_scaleValue = m_scaleDafault;//缩放比例回到一开始的自适应比例
 	setScale(m_scaleDafault);//缩放到一开始的自适应大小
 	setPos(0, 0);
+	
 }
 
 qreal ImageWidget::getScaleValue() const

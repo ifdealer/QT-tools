@@ -49,6 +49,7 @@ public:
 
 	void buildWin(int width, int height);  //创建图片窗口
 	ImageWindow* getImageWindow();
+	void setPix(Image* image);
 private:
 	qreal       m_scaleValue;
 	qreal       m_scaleDafault;
@@ -63,4 +64,5 @@ private:
 
 	ImageWindow* imgWindow;
 	Image*       m_image;   //自定义图像操作类
+	int index; //图像索引
 };

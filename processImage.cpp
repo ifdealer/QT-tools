@@ -6,12 +6,22 @@ bool Image::readimage(string filepath, int readflag)
 	if (filepath.empty()) {
 		return false;
 	}
-	SourceImage = imread(filepath, readflag);
-	this->filepath = filepath;
+	Mat tmpimage = imread(filepath, readflag);
+	tmpimage.copyTo(this->SourceImage);
+	this->filepath = (filepath);
 	/*imshow("image", SourceImage);
 	waitKey(0);*/
 	return true;
 
+}
+
+bool Image::blur(int achor)
+{
+	
+	achor *= 2;
+	achor += 1;
+	medianBlur(SourceImage, this->processImage, achor);
+	return true;
 }
 
 

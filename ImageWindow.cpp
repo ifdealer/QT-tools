@@ -55,7 +55,8 @@ void ImageWindow::setCor(QPointF ptsf)
 	ui.poslabel->setText(qstr);
 }
 
-void ImageWindow::setCorValue(int B, int G, int R)
+//在窗口右下方显示RGB颜色值
+void ImageWindow::setCorValue(int R, int G, int B)
 {
 	stringstream strd;
 	strd << R;

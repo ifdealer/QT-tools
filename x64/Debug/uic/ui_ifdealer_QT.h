@@ -14,6 +14,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -26,6 +27,7 @@ public:
     QWidget *centralWidget;
     QPushButton *SelectFile;
     QPushButton *Showimage;
+    QSlider *blurSlider;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -43,6 +45,16 @@ public:
         Showimage = new QPushButton(centralWidget);
         Showimage->setObjectName(QString::fromUtf8("Showimage"));
         Showimage->setGeometry(QRect(40, 160, 75, 23));
+        blurSlider = new QSlider(centralWidget);
+        blurSlider->setObjectName(QString::fromUtf8("blurSlider"));
+        blurSlider->setGeometry(QRect(70, 260, 160, 22));
+        blurSlider->setMinimum(0);
+        blurSlider->setMaximum(30);
+        blurSlider->setSingleStep(1);
+        blurSlider->setPageStep(12);
+        blurSlider->setValue(1);
+        blurSlider->setSliderPosition(1);
+        blurSlider->setOrientation(Qt::Horizontal);
         ifdealer_QTClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ifdealer_QTClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));

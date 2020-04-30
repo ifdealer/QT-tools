@@ -10,6 +10,7 @@
 #include <qstring.h>
 #include <qfiledialog.h>
 #include <qgraphicsview.h>
+#include <QSignalMapper>
 
 class ifdealer_QT : public QMainWindow
 {
@@ -21,16 +22,21 @@ public:
 private:
 	Ui::ifdealer_QTClass ui;
 	QString filepath; //图片路径
-	Image *image;  //图像对象
+	vector<Image*> image;  //图像对象
 	QImage img;
 	QPixmap tempPixmap;
 
-	ImageWidget* m_Image;
+	vector<ImageWidget*> m_Image;
+
+
+	//转发器
+	QSignalMapper* signalMapper;
 	
 
 private slots:
 	//选择文件槽函数
 	void SelectFile(); 
 	//显示图片
-	void ShowWindow();
+	void ShowWindow(int i);
+	void blurImage(int i);
 };
